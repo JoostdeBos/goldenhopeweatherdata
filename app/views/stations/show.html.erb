@@ -1,0 +1,25 @@
+<% title "Station" %>
+
+
+<p>
+  <strong>Country:</strong>
+  <%= @station.country.capitalize! %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @station.city.capitalize! %>
+</p>
+<p>
+  <strong>Latitude:</strong>
+  <%= @station.latitude %>
+</p>
+<p>
+  <strong>Longitude:</strong>
+  <%= @station.longitude %>
+</p>
+<p>
+  <strong>Elevation:</strong>
+  <%= @station.elevation %>
+</p>
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}" %>

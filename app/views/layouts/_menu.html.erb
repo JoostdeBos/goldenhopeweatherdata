@@ -1,0 +1,22 @@
+  <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <%= link_to "Golden Hope", root_url, :class => 'brand'%>
+          <ul class="nav">
+            <li><a href="#">Dataset 1</a></li>
+            <li><a href="#">Dataset 2</a></li>
+            <li><a href="#">Dataset 3</a></li>
+            <li><%= link_to "Stations", stations_path %></li>
+          </ul>
+          <div id="user_nav">
+		        <% if current_user %>
+		          Logged in as <%= current_user.email %>
+              <%= link_to "Edit details", edit_current_user_path, :class => "btn small primary" %>
+		          <%= link_to "Log out", logout_path, :class => "btn small" %>
+		        <% else %>
+      		    <%= link_to "Log in", login_path, :class => "btn small" %>
+      		  <% end %>
+        </div>
+      </div>
+    </div>
+    </div>

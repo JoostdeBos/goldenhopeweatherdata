@@ -1,0 +1,25 @@
+<%= form_for @user, :html => { :class => "form-stacked"} do |f|  %>
+  <% if f.error_messages %>
+  <div class="alert-message block-message error">
+  <a class="close" href="#">×</a>
+    <%= f.error_messages %>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </p>
+  <p>
+    <%= f.label :email, "Email Address" %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation, "Confirm Password" %>
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p><%= f.submit (@user.new_record? ? "Sign up" : "Update") %>
+<% end %>

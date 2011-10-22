@@ -1,0 +1,19 @@
+<% title "Stations" %>
+
+<%= paginate @stations %>
+
+<table class="zebra-striped">
+  <tr>
+    <th>Country</th>
+    <th>City</th>
+    <th>Show</th>
+  </tr>
+  <% for station in @stations %>
+    <tr>
+      <td><%= station.country.capitalize! %></td>
+      <td><%= station.city.capitalize! %></td>
+      <td><%= link_to "Show", station %></td>
+    </tr>
+  <% end %>
+</table>
+
