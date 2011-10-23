@@ -1,4 +1,4 @@
-<% title "Station" %>
+<% title @station.city.capitalize %>
 
 <div class="span10"
 <p>
@@ -24,8 +24,10 @@
 
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}" %>
-</div
+
 <%= render 'weatherdata' %>
 
 <%= render 'chart' %>
-<div id="temperature_chart" style="width:800px; height:400px; margin-top:200px;"></div>
+</div>
+
+<div id="temperature_chart" style="width:580px; height:300px; margin-top:200px;"></div>

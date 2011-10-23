@@ -29,3 +29,7 @@
 	width: 800px;
 	height: 600px;
 }
+
+.span10 {
+	min-height: 500px;
+}

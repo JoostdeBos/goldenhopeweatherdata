@@ -1,4 +1,5 @@
-<div class="span4">
+	</div>
+	<div class="span4">
   <h2>Weatherdata</h2>
   <h5><small>Last updated <%= time_ago_in_words(@last_updated) %> ago </small></h5> 
   <p>
@@ -41,3 +42,11 @@
     <strong>Winddirection: </strong>
      <%= @winddir %> </p>
   </p>
+  <h2> Nearby stations </h2>
+  <% if @station.nearbys(100).any? %>
+	  <% for station in @station.nearbys(100) %>
+	  	<li><%= link_to "#{station.country.capitalize}, #{station.city.capitalize}", station %> (<%= (station.distance * Geocoder::Calculations.mi_in_km).round(2) %>km) </li>
+	  <% end %>
+	<% else %>
+		<p> No stations found in a radius of 100km. </p>
+	<% end %>
