@@ -22,11 +22,17 @@ class StationsController < ApplicationController
     @winddir = weatherdata["winddir"]
 
     # returns an array with all the temperatures (for graph)
-    # data = @station.weatherdata
-    # @all_temps = []
-    # data.each do |t|
-    #   @all_temps << t["temp"].round(2)
-    # end
+    data = @station.weatherdata
+    @all_temps = []
+    @all_times = []
+    @all_clouds = []
+    data.each do |t|
+      @all_temps << t["temp"].round(2)
+      @all_temps << "," #Yes, i'm a bad person and i should feel bad.
+      @all_times << t["time"].to_i
+      @all_clouds << t["cloudcoverage"].round(2)
+      @all_clouds << "," #hackedyhack
+    end
   end
 
   def map

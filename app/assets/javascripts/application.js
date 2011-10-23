@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require gmaps4rails/googlemaps.js
+//= require highcharts.js
 //= require_tree .
 
 //wait until dom is ready
