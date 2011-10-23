@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+require "rubygems"
+
 gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
@@ -14,6 +16,10 @@ gem 'geocoder'
 gem 'kaminari'
 
 gem 'gmaps4rails'
+
+gem 'bson_ext'
+
+gem 'mongo_mapper'
 
 # Gems used only for assets and not required
 # in production environments by default.

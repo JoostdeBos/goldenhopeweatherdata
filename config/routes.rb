@@ -11,6 +11,8 @@ GoldenHope::Application.routes.draw do
 
   match 'login' => 'sessions#new', :as => :login
 
+  match 'weatherdata' => 'weatherdata#index'
+
   resources :sessions
 
   resources :users

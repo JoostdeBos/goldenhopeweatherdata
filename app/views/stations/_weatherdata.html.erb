@@ -1,0 +1,46 @@
+<div class="span4">
+  <h2>Weatherdata</h2>
+  <h5><small>Last updated <%= time_ago_in_words(@last_updated) %> ago </small></h5> 
+  <p>
+    <strong>Temperature: </strong>
+     <%= @temp %> </p>
+  </p>
+  <p>
+    <strong>Dewpoint: </strong>
+     <%= @dewpoint %> </p>
+  </p>
+  <p>
+    <strong>Airpressure: </strong>
+     <%= @airpressure %> </p>
+  </p>
+  <p>
+    <strong>Stationpressure: </strong>
+     <%= @stationpressure %> </p>
+  </p>
+  <p>
+    <strong>Visibility: </strong>
+     <%= @visibility %> </p>
+  </p>
+  <p>
+    <strong>Windspeed: </strong>
+     <%= @windspeed %> </p>
+  </p>
+  <p>
+    <strong>Precipitation: </strong>
+     <%= @precipitation %> </p>
+  </p>
+  <p>
+    <strong>Snowlevel: </strong>
+     <%= @snow %> </p>
+  </p>
+  <p>
+    <strong>Cloudcoverage: </strong>
+     <%= @cloudcoverage %> </p>
+  </p>
+  <p>
+    <strong>Winddirection: </strong>
+     <%= @winddir %> </p>
+  </p>
+
+  <%= @all_temps %>
+</div>

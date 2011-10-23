@@ -1,6 +1,6 @@
 <% title "Station" %>
 
-
+<div class="span10"
 <p>
   <strong>Country:</strong>
   <%= @station.country.capitalize! %>
@@ -22,4 +22,7 @@
   <%= @station.elevation %>
 </p>
 
+
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}" %>
+</div
+<%= render 'weatherdata' %>
