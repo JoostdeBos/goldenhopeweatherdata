@@ -3,7 +3,12 @@ class StationsController < ApplicationController
 
   def index
     if params[:search].present?
-      @stations = Station.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
+      #this isn't really DRY yet, need to fix but not smart enough
+      if params[:distance].present?
+         @stations = Station.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
+       else
+        @stations = Station.near(params[:search], 50, :units => :km, :order => :distance).page(params[:page]).per(25)
+      end
     else
       @stations = Station.order("country", "city").page(params[:page]).per(25)
     end
