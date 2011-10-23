@@ -2,7 +2,11 @@ class StationsController < ApplicationController
 	before_filter :login_required
 
   def index
-    @stations = Station.order("country", "city").page(params[:page]).per(25)
+    if params[:search].present?
+      @stations = Station.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
+    else
+      @stations = Station.order("country", "city").page(params[:page]).per(25)
+    end
   end
 
   def show
@@ -29,8 +33,9 @@ class StationsController < ApplicationController
     data.each do |t|
       @all_temps << t["temp"].round(2)
       @all_temps << "," #Yes, i'm a bad person and i should feel bad.
-      @all_times << t["time"].to_i
-      @all_clouds << t["cloudcoverage"].round(2)
+      @all_times << t["time"]
+      @all_times << ","
+      @all_clouds << t["cloudcoverage"].round(1)
       @all_clouds << "," #hackedyhack
     end
   end

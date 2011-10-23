@@ -1,5 +1,13 @@
 <% title "Stations" %>
 
+<%= form_tag stations_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search], :placeholder => 'City' %>
+    <%= text_field_tag :distance, params[:distance], :placeholder => 'Distance', :class => "mini" %>
+    <%= submit_tag "Search Near", :name => nil, :class => 'btn small primary' %>
+  </p>
+<% end %>
+
 <%= paginate @stations %>
 
 <table class="zebra-striped">

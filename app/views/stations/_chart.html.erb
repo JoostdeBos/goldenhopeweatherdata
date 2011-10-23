@@ -10,6 +10,9 @@ $(document).ready(function() {
          text: 'Temperature vs. Cloud Density',
          x: -20 //center
       },
+      xAxis: {
+         type: "datetime"
+      },
       yAxis: [{ // Primary yAxis
          labels: {
             formatter: function() {
@@ -21,7 +24,10 @@ $(document).ready(function() {
          }
       }, { // Secondary yAxis
          title: {
-            text: 'Cloud Density',
+            text: 'Cloud Coverage',
+            style: {
+               color: '#AA4643'
+            }
          },
          labels: {
             formatter: function() {
@@ -33,22 +39,22 @@ $(document).ready(function() {
       tooltip: {
          formatter: function() {
             return ''+
-               this.x +': '+ this.y +
-               (this.series.name == 'Cloud Density' ? ' %' : '%');
+               Highcharts.dateFormat("%B %e %Y, %H:%M:%S", this.x) +' => '+ this.y +
+               (this.series.name == 'Temperature' ? ' °C' : ' %');
          }
       },
       series: [{
          pointInterval: <%= 1.hour * 1000 %>,
-         pointStart: <%= @all_times.first * 1000 %>,
+         pointStart: <%= DateTime.parse(@all_times.first).to_i * 1000 %>,
          name: "Temperature",
-         type: 'column',
-         yAxis: 1,
          data: [<%= @all_temps %>]
       }, {
-        pointInterval: <%= 1.hour * 1000 %>,
-        pointStart: <%= @all_times.first * 1000 %>,
-        name: "Cloud coverage",
-        data: [<%= @all_clouds %>]
+         pointInterval: <%= 1.hour * 1000 %>,
+         pointStart: <%= DateTime.parse(@all_times.first).to_i * 1000 %>,
+         name: "Cloud coverage",
+         type: 'column',
+         yAxis: 1,
+         data: [<%= @all_clouds %>]
       }]
    });
 });

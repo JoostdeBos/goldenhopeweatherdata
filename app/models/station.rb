@@ -1,9 +1,12 @@
 class Station < ActiveRecord::Base
   attr_accessible :id, :address, :city, :country, :latitude, :longitude, :elevation, :gmaps
+  geocoded_by :address
   acts_as_gmappable
 
+  #returns a json array with weatherdata, not sure how to get an object that we can do anything with aorn
+  #should probably figure that out though cus this is kind of a dirty hack
   def weatherdata
-    ActiveSupport::JSON.decode(Weatherdata.all(:conditions => {:station_id => self.id}).to_json)
+    ActiveSupport::JSON.decode(Weatherdata.where(:station_id => self.id).sort(:time).to_json)
   end
 
   def gmaps4rails_address
