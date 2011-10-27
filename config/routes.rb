@@ -13,6 +13,8 @@ GoldenHope::Application.routes.draw do
 
   match 'weatherdata' => 'weatherdata#index'
 
+  match 'dataset1' => 'stations#dataset1'
+
   resources :sessions
 
   resources :users

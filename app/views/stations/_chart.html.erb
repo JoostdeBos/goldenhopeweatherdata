@@ -45,16 +45,16 @@ $(document).ready(function() {
       },
       series: [{
          pointInterval: <%= 1.hour * 1000 %>,
-         pointStart: <%= DateTime.parse(@all_times.first).to_i * 1000 %>,
+         pointStart: <%= @station.measurements.first.utime.to_i * 1000 %>,
          name: "Temperature",
-         data: [<%= @all_temps %>]
+         data: <%= @all_temps.inspect %>
       }, {
-         pointInterval: <%= 1.hour * 1000 %>,
-         pointStart: <%= DateTime.parse(@all_times.first).to_i * 1000 %>,
+         pointInterval: <%= 1.second * 1000 %>,
+         pointStart: <%= @station.measurements.first.utime.to_i * 1000 %>,
          name: "Cloud coverage",
          type: 'column',
          yAxis: 1,
-         data: [<%= @all_clouds %>]
+         data: <%= @all_clouds.inspect %>
       }]
    });
 });

@@ -1,0 +1,20 @@
+<% title "Dataset 1" %>
+
+<%= paginate @dataset1 %>
+
+<table>
+<th>Station id</th>
+<th>Average temperature</th>
+<th>Max temperature</th>
+<th>Average Precipitation</th>
+<% @dataset1.each do |d| %>
+	<% #filtering in your view is bad %>
+	<% if d["max_temp"] > 25 %>
+		<tr>
+			<td> <%= d["station_id"].to_i %> </td>
+			<td> <%= d["average"].round(2) %> </td>
+			<td> <%= d["max_temp"].round(2) %> </td>
+			<td> <%= d["precipitation"].round(2) %> </td>
+		</tr>
+	<% end %>
+<% end %>

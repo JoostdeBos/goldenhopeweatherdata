@@ -1,5 +1,9 @@
 class StationsController < ApplicationController
 	before_filter :login_required
+  MIN_PRECIPITATION = 5
+  MAX_PRECIPITATION = 10
+  MIN_TEMP = 20
+  MAX_TEMP = 30
 
   def index
     if params[:search].present?
@@ -10,51 +14,38 @@ class StationsController < ApplicationController
         @stations = Station.near(params[:search], 50, :units => :km, :order => :distance).page(params[:page]).per(25)
       end
     else
-      @stations = Station.order("country", "city").page(params[:page]).per(25)
+      @stations = Station.all.page(params[:page]).per(25)
     end
+  end
+
+  def dataset1
+    #gets average temperature of all measurements where temperature was in range
+    #we probably need to do the actual query with map/reduce but map/reduce is hard :(
+    @dataset1 = Kaminari.paginate_array(Weatherdata.collection.group([:station_id],
+                                            {:temp => {:$gte => MIN_TEMP, :$lt => MAX_TEMP}}, {:temperature => 0, :count => 0, :max_temp => 0, :precipitation => 0},
+                                            "function(doc, prev) {
+                                              prev.temperature += doc.temp, 
+                                              prev.precipitation += doc.precipitation,
+                                              prev.count += 1, 
+                                              prev.max_temp < doc.temp ? prev.max_temp = doc.temp : prev.max_temp = prev.max_temp}", 
+                                            "function(prev) {
+                                              prev.average = prev.temperature / prev.count,
+                                              prev.average_pre = prev.precipitation / prev.count}")).page(params[:page]).per(25)
   end
 
   def show
   	@station = Station.find(params[:id])
-
-    weatherdata = @station.weatherdata.last
-    @last_updated = weatherdata["time"]
-    @temp = weatherdata["temp"].round(2)
-    @dewpoint = weatherdata["dewpoint"].round(2)
-    @airpressure = weatherdata["airpressure"].round(2)
-    @stationpressure = weatherdata["stationpressure"].round(2)
-    @visibility = weatherdata["visibility"].round(2)
-    @windspeed = weatherdata["windspeed"].round(2)
-    @precipitation = weatherdata["precipitation"].round(2)
-    @snow = weatherdata["snow"].round(2)
-    @cloudcoverage = weatherdata["cloudcoverage"].round(2)
-    @winddir = weatherdata["winddir"]
-
-    # returns an array with all the temperatures (for graph)
-    data = @station.weatherdata
+    @measurement = @station.measurements.last
     @all_temps = []
-    @all_times = []
     @all_clouds = []
-    data.each do |t|
-      @all_temps << t["temp"].round(2)
-      @all_temps << "," #Yes, i'm a bad person and i should feel bad.
-      @all_times << t["time"]
-      @all_times << ","
-      @all_clouds << t["cloudcoverage"].round(1)
-      @all_clouds << "," #hackedyhack
+      @station.measurements.each do |m|
+      @all_temps.push m.temp
+      @all_clouds.push m.cloudcoverage
     end
   end
 
   def map
-    t = Station.arel_table
-    @json = Station.where(
-      t[:country].eq("MALAYSIA").
-      or(t[:country].eq("VIETNAM")).
-      or(t[:country].eq("INDONESIA")).
-      or(t[:country].eq("THAILAND"))).to_gmaps4rails
-  end
-
-  def all_temps
+    @json = Station.all.to_a.to_gmaps4rails
   end
   
 end

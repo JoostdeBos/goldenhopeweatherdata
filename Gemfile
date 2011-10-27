@@ -17,11 +17,17 @@ gem 'kaminari'
 
 gem 'gmaps4rails'
 
-gem 'bson_ext'
+gem "mongoid", "~> 2.3"
 
-gem 'mongo_mapper'
+gem 'mongoid_geo'
+
+gem "bson_ext", "~> 1.4"
 
 gem 'client_side_validations'
+
+group :development do
+	gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
