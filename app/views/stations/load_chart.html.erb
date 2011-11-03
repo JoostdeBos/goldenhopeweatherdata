@@ -1,0 +1,13 @@
+<div class="modal-backdrop fade in"></div>
+<div id="chart-modal" class="modal hide fade in" style="display: block; ">
+  <div class="modal-header">
+    <a href="#" class="close" id="close">×</a>
+    <h3><%= "#{@station.city.capitalize}, #{@station.city.capitalize}" %></h3>
+  </div>
+  <div class="modal-body">
+    <p> <%= render 'chart' %> <p>
+    <div id="temperature_chart" style="width:500px; height:300px;"></div>
+  </div>
+    <div class="modal-footer">
+  </div>
+</div>

@@ -1,3 +1,15 @@
 <% title "Home" %>
 
 <%= gmaps4rails(@json) %>
+
+<div id="chart-container"></div>
+
+<script>
+	function getChart(station_id) {
+		$('#chart-modal').modal('show');
+		var url = 'load_chart?station_id='+ station_id;
+		var new_html = "<a href='#' data-controls-modal='chart-modal'>Show chart</a>"
+		$('#chart-container').load(url, function() {
+		});
+	}
+</script>

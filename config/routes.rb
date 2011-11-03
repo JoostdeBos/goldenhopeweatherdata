@@ -15,6 +15,8 @@ GoldenHope::Application.routes.draw do
 
   match 'dataset1' => 'stations#dataset1'
 
+  match 'load_chart' => 'stations#load_chart'
+
   resources :sessions
 
   resources :users

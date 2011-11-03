@@ -1,3 +1,5 @@
+<!-- this should be a function that we can pass arguments to so we can generate any graph we want! -->
+
 <script type="text/javascript" chartset="utf-8">
   var chart;
 $(document).ready(function() {
@@ -45,12 +47,12 @@ $(document).ready(function() {
       },
       series: [{
          pointInterval: <%= 1.hour * 1000 %>,
-         pointStart: <%= @station.measurements.first.utime.to_i * 1000 %>,
+         pointStart: <%= 5.days.ago.to_i * 1000 %>,
          name: "Temperature",
          data: <%= @all_temps.inspect %>
       }, {
-         pointInterval: <%= 1.second * 1000 %>,
-         pointStart: <%= @station.measurements.first.utime.to_i * 1000 %>,
+         pointInterval: <%= 1.hour * 1000 %>,
+         pointStart: <%= 5.days.ago.to_i * 1000 %>,
          name: "Cloud coverage",
          type: 'column',
          yAxis: 1,
