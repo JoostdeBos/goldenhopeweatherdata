@@ -27,9 +27,13 @@
 
 #map {
 	width: 900px;
-	height: 400px;
+	height: 700px;
 }
 
 .span10 {
 	min-height: 500px;
+}
+
+footer {
+	text-align: center;
 }

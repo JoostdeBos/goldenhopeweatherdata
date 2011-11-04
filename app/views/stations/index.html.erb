@@ -2,7 +2,8 @@
 
 <%= render 'search' %>
 
-<%= paginate @stations %>
+
+<%= paginate @stations %> <%= link_to "Download all data", :download_all_xml, :class => "btn", :style => "float: right;" %>
 
 <table class="zebra-striped">
   <tr>

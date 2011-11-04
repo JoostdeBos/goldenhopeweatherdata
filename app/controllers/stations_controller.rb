@@ -33,6 +33,13 @@ class StationsController < ApplicationController
       end
   end
 
+  def all_to_xml
+  @stations = Station.all
+  send_data @stations.to_xml,
+    :type => 'text/xml; charset=UTF-8;',
+    :disposition => "attachment; filename=stations.xml"
+  end
+
   def map
     @json = Station.where(:measurements.exists => true).limit(1000).to_a.to_gmaps4rails
   end

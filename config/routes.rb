@@ -17,6 +17,8 @@ GoldenHope::Application.routes.draw do
 
   match 'load_chart' => 'stations#load_chart'
 
+  match 'download_all_xml' => 'stations#all_to_xml'
+
   resources :sessions
 
   resources :users
