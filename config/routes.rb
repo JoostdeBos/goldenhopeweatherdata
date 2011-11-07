@@ -3,6 +3,10 @@ GoldenHope::Application.routes.draw do
 
   resources :datasetones
 
+  resources :sessions
+
+  resources :users
+
   root :to => 'stations#index'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
@@ -19,13 +23,7 @@ GoldenHope::Application.routes.draw do
 
   match 'download_all_xml' => 'stations#all_to_xml'
 
-  match 'datasetone' => 'datasetone#index'
-
   match 'datasetthree' => 'stations#map'
-
-  resources :sessions
-
-  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,9 +1,5 @@
 class StationsController < ApplicationController
 	before_filter :login_required
-  # MIN_PRECIPITATION = 5
-  # MAX_PRECIPITATION = 10
-  # MIN_TEMP = 20
-  # MAX_TEMP = 30
 
   def index
     #if we're searching for something
@@ -28,7 +24,7 @@ class StationsController < ApplicationController
     @all_clouds = []
     #build graph data
       @station.measurements.each do |m|
-        @all_temps. << m.temp.round(2)
+        @all_temps << m.temp.round(2)
         @all_clouds << m.cloudcoverage.round(2)
       end
   end
