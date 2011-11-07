@@ -8,19 +8,5 @@
 //= require jquery_ujs
 //= require gmaps4rails/googlemaps.js
 //= require highcharts.js
-//= require_tree .
-
-//wait until dom is ready
-$(document).ready(function() {
-	//fade error flashes
-	$('#error').fadeTo(8000, 0.0, function() {
-    	$("#error").slideUp(1000, function() {
-		});
-    });
-    //remove error messages when the 'x' is clicked
-    $('.close').click(function() {
-	  $(".alert-message").slideUp(1000, function() {
-		});
-	});
-	
-});
+//= require modals.js
+//= require_tree

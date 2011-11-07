@@ -1,36 +1,24 @@
 class StationsController < ApplicationController
 	before_filter :login_required
-  MIN_PRECIPITATION = 5
-  MAX_PRECIPITATION = 10
-  MIN_TEMP = 20
-  MAX_TEMP = 30
+  # MIN_PRECIPITATION = 5
+  # MAX_PRECIPITATION = 10
+  # MIN_TEMP = 20
+  # MAX_TEMP = 30
 
   def index
+    #if we're searching for something
     if params[:search].present?
-      #this isn't really DRY yet, need to fix but not smart enough
+      #if we're searching with a distance, use that
       if params[:distance].present?
          @stations = Station.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
+        #otherwise, search within 50km
        else
         @stations = Station.near(params[:search], 50, :units => :km, :order => :distance).page(params[:page]).per(25)
       end
+    #else show all (paged at 25 stations per page)
     else
       @stations = Station.all.page(params[:page]).per(25)
     end
-  end
-
-  def dataset1
-    #gets average temperature of all measurements where temperature was in range
-    #we probably need to do the actual query with map/reduce but map/reduce is hard :(
-    @dataset1 = Kaminari.paginate_array(Weatherdata.collection.group([:station_id],
-                                            {:temp => {:$gte => MIN_TEMP, :$lt => MAX_TEMP}}, {:temperature => 0, :count => 0, :max_temp => 0, :precipitation => 0},
-                                            "function(doc, prev) {
-                                              prev.temperature += doc.temp, 
-                                              prev.precipitation += doc.precipitation,
-                                              prev.count += 1, 
-                                              prev.max_temp < doc.temp ? prev.max_temp = doc.temp : prev.max_temp = prev.max_temp}", 
-                                            "function(prev) {
-                                              prev.average = prev.temperature / prev.count,
-                                              prev.average_pre = prev.precipitation / prev.count}")).page(params[:page]).per(25)
   end
 
   def show
@@ -38,14 +26,34 @@ class StationsController < ApplicationController
     @measurement = @station.measurements.last
     @all_temps = []
     @all_clouds = []
+    #build graph data
       @station.measurements.each do |m|
-      @all_temps.push m.temp
-      @all_clouds.push m.cloudcoverage
-    end
+        @all_temps. << m.temp.round(2)
+        @all_clouds << m.cloudcoverage.round(2)
+      end
+  end
+
+  def all_to_xml
+  @stations = Station.all.limit(250)
+  send_data @stations.to_xml,
+    :type => 'text/xml; charset=UTF-8;',
+    :disposition => "attachment; filename=stations.xml"
   end
 
   def map
-    @json = Station.all.to_a.to_gmaps4rails
+    @json = Station.all.limit(1000).to_a.to_gmaps4rails
+  end
+
+  def load_chart
+    @station = Station.find(params[:station_id]) 
+    @measurement = @station.measurements.last
+    @all_temps = []
+    @all_clouds = []
+    #build graph data
+    @station.measurements.each do |m|
+      @all_temps. << m.temp.round(2)
+      @all_clouds << m.cloudcoverage.round(2)
+    end
   end
   
 end
