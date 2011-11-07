@@ -1,9 +1,11 @@
 <% title "Stations" %>
 
-<%= render 'search' %>
+<%= render 'layouts/search' %>
 
 
-<%= paginate @stations %> <%= link_to "Download all data", :download_all_xml, :class => "btn", :style => "float: right;" %>
+<%= paginate @stations %> 
+
+<%= link_to "Download as XML", :download_all_xml, :class => "btn", :style => "float: right; margin-top: -100px; /*lol haxx*/" %>
 
 <table class="zebra-striped">
   <tr>
@@ -19,4 +21,3 @@
     </tr>
   <% end %>
 </table>
-

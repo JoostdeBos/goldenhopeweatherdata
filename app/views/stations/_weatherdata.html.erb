@@ -1,51 +1,51 @@
 	</div>
 	<div class="span4">
   <h2>Weatherdata</h2>
-  <h5><small>Last updated  ago </small></h5> 
+  <h5><small>Last updated about 1 minute ago </small></h5> 
   <p>
     <strong>Temperature: </strong>
-     <%= @measurement.temp.round(1) %> </p>
+     <%= @measurement.temp.round(1) %>&deg;C</p>
   </p>
   <p>
     <strong>Dewpoint: </strong>
-     <%= @measurement.dewpoint.round(1) %> </p>
+     <%= @measurement.dewpoint.round(1) %>&deg;C </p>
   </p>
   <p>
     <strong>Airpressure: </strong>
-     <%= @measurement.airpressure.round(1) %> </p>
+     <%= @measurement.airpressure.round(1) %> mbar</p>
   </p>
   <p>
     <strong>Stationpressure: </strong>
-     <%= @measurement.stationpressure.round(1) %> </p>
+     <%= @measurement.stationpressure.round(1) %> mbar</p>
   </p>
   <p>
     <strong>Visibility: </strong>
-     <%= @measurement.visibility.round(1) %> </p>
+     <%= @measurement.visibility.round(1) %> km</p>
   </p>
   <p>
     <strong>Windspeed: </strong>
-     <%= @measurement.windspeed.round(1) %> </p>
+     <%= @measurement.windspeed.round(1) %> km/h </p>
   </p>
   <p>
     <strong>Precipitation: </strong>
-     <%= @measurement.precipitation.round(1) %> </p>
+     <%= @measurement.precipitation.round(1) %> mm</p>
   </p>
   <p>
     <strong>Snowlevel: </strong>
-     <%= @measurement.snow.round(1) %> </p>
+     <%= @measurement.snow.round(1) %> cm</p>
   </p>
   <p>
     <strong>Cloudcoverage: </strong>
-     <%= @measurement.cloudcoverage.round(1) %> </p>
+     <%= @measurement.cloudcoverage.round(1) %> %</p>
   </p>
   <p>
     <strong>Winddirection: </strong>
-     <%= @measurement.winddir %> </p>
+     <%= @measurement.winddir %>&deg;</p>
   </p>
   <h2> Nearby stations </h2>
   <% if @station.nearbys(25).any? %>
-	  <% for station in @station.nearbys(25) %>
-	  	<li><%= link_to "#{station.country.capitalize}, #{station.city.capitalize}", station %> (<%= (station.distance * Geocoder::Calculations.mi_in_km).round(2) %>km) </li>
+	  <% for s in @station.nearbys(25) %>
+	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (s.distance_from(@station.coordinates) ) %>km) </li>
 	  <% end %>
 	<% else %>
 		<p> No stations found in a radius of 25km. </p>

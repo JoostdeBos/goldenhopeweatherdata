@@ -1,7 +1,9 @@
 GoldenHope::Application.routes.draw do
   resources :stations
 
-  root :to => 'stations#map'
+  resources :datasetones
+
+  root :to => 'stations#index'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user
 
@@ -13,11 +15,13 @@ GoldenHope::Application.routes.draw do
 
   match 'weatherdata' => 'weatherdata#index'
 
-  match 'dataset1' => 'stations#dataset1'
-
   match 'load_chart' => 'stations#load_chart'
 
   match 'download_all_xml' => 'stations#all_to_xml'
+
+  match 'datasetone' => 'datasetone#index'
+
+  match 'datasetthree' => 'stations#map'
 
   resources :sessions
 

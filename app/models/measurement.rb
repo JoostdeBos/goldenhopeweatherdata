@@ -3,7 +3,7 @@ class Measurement
   	include Mongoid::Document
   	include Mongoid::Geo
 
-  	embedded_in :station
+  	belongs_to :station
 
 	field :date, :type => Date
 	field :utime, :type => Time
