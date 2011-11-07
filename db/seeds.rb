@@ -10,7 +10,7 @@ require 'csv'
 
 #fill the database with all the stations
 Station.delete_all
-CSV.open('/Users/jurrestender/golden_hope/db/stations.csv', 'r', ';').each do |row|
+CSV.open('C:\Users\N61VG\FirstGit\goldenhopeweatherdata\db\stations.csv', 'r', ';').each do |row|
   	station = Station.create!(
 		:station_id => row[0], 
 		:address =>"#{row[1]}, #{row[2]}", 
@@ -23,7 +23,7 @@ CSV.open('/Users/jurrestender/golden_hope/db/stations.csv', 'r', ';').each do |r
 end
 
 for station in Station.all
-	for i in 1..10
+	for i in 1..2
 		station.measurements << [Measurement.new(
 			:date => DateTime.now, 
 			:utime => Time.now, 
@@ -43,4 +43,4 @@ end
 
 		
 #create an admin user, uncomment when running for the first time
-# User.create!(:username => 'admin', :password => 'admin', :confirm_password => 'admin', :email => 'admin@goldenhope.com')
+#User.create!(:username => 'admin', :password => 'admin', :confirm_password => 'admin', :email => 'admin@goldenhope.com')
