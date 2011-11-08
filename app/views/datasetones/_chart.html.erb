@@ -1,0 +1,63 @@
+<!-- this should be a function that we can pass arguments to so we can generate any graph we want! -->
+
+<script type="text/javascript" chartset="utf-8">
+  var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'temperature_chart',
+         defaultSeriesType: 'line',
+      },
+      title: {
+         text: 'Temperature vs. Cloud Density',
+         x: -20 //center
+      },
+      xAxis: {
+         type: "datetime"
+      },
+      yAxis: [{ // Primary yAxis
+         labels: {
+            formatter: function() {
+               return this.value +'°C';
+            },
+         },
+         title: {
+            text: 'Temperature',
+         }
+      }, { // Secondary yAxis
+         title: {
+            text: 'Cloud Coverage',
+            style: {
+               color: '#AA4643'
+            }
+         },
+         labels: {
+            formatter: function() {
+               return this.value +' %';
+            },
+         },
+         opposite: true
+      }],
+      tooltip: {
+         formatter: function() {
+            return ''+
+               Highcharts.dateFormat("%B %e %Y, %H:%M:%S", this.x) +' => '+ this.y +
+               (this.series.name == 'Temperature' ? ' °C' : ' %');
+         }
+      },
+      series: [{
+         pointInterval: <%= 1.hour * 1000 %>,
+         pointStart: <%= 5.days.ago.to_i * 1000 %>,
+         name: "Temperature",
+         data: <%= @all_temps.inspect %>
+      }, {
+         pointInterval: <%= 1.hour * 1000 %>,
+         pointStart: <%= 5.days.ago.to_i * 1000 %>,
+         name: "Cloud coverage",
+         type: 'column',
+         yAxis: 1,
+         data: <%= @all_prcp.inspect %>
+      }]
+   });
+});
+</script>

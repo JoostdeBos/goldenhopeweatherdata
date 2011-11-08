@@ -44,8 +44,8 @@ class Station
   def gmaps4rails_infowindow
   	title = "<h5>#{city.capitalize}, #{country.capitalize}<h5>"
     if measurements.length > 0
-      temp = " <p><b>Temperature: </b>#{measurements.last.temp.round(2)}</p>" 
-      clouds = "<p> <b>Cloud coverage: </b>#{measurements.last.cloudcoverage.round(2)}</p>"
+      temp = " <p><b>Temperature: </b>#{measurements.last.temp.round(1)}&deg;</p>" 
+      clouds = "<p> <b>Cloud coverage: </b>#{measurements.last.cloudcoverage.round(1)}%</p>"
       js = "onClick=getChart('#{id}');"
       link = "<a href='#' id='#{id}' #{js}>Show chart</a>"
       title + temp + clouds + link
