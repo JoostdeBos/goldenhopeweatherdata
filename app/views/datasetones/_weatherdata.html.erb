@@ -1,51 +1,55 @@
 	</div>
 	<div class="span4">
   <h2>Weatherdata</h2>
-  <h5><small>Last updated  ago </small></h5> 
-  <p>
-    <strong>Temperature: </strong>
-     <%= @measurement.temp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Dewpoint: </strong>
-     <%= @measurement.dewp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Airpressure: </strong>
-     <%= @measurement.stp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Stationpressure: </strong>
-     <%= @measurement.slp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Visibility: </strong>
-     <%= @measurement.visib.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Windspeed: </strong>
-     <%= @measurement.wdsp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Precipitation: </strong>
-     <%= @measurement.prcp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Snowlevel: </strong>
-     <%= @measurement.sndp.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Cloudcoverage: </strong>
-     <%= @measurement.cldc.round(1) %> </p>
-  </p>
-  <p>
-    <strong>Winddirection: </strong>
-     <%= @measurement.wnddir %> </p>
-  </p>
+  <h5><small>Last updated one second ago </small></h5>
+  <table>
+  <th>Type</th>
+  <th>Measured</td>
+  <tr>
+    <td><strong>Temperature: </strong></td>
+    <td><%= @measurement.temp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Dewpoint: </strong></td>
+    <td><%= @measurement.dewp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Airpressure: </strong></td>
+    <td><%= @measurement.stp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Stationpressure: </strong></td>
+    <td><%= @measurement.slp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Visibility: </strong></td>
+    <td><%= @measurement.visib.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Windspeed: </strong></td>
+    <td><%= @measurement.wdsp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Precipitation: </strong></td>
+    <td><%= @measurement.prcp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Snowlevel: </strong></td>
+    <td><%= @measurement.sndp.round(1) %></td>
+  </tr>
+  <tr>
+    <td><strong>Cloudcoverage: </strong></td>
+    <td><%= @measurement.cldc.round(1) %></tr>
+  </tr>
+  <tr>
+    <td><strong>Winddirection: </strong></td>
+    <td><%= @measurement.wnddir %> </p></td>
+  </tr>
+  </table>
   <h2> Nearby stations </h2>
   <% if @station.nearbys(25).any? %>
 	  <% for s in @station.nearbys(25) %>
-	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (s.distance_from(@station.coordinates) ) %>km) </li>
+	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (Geocoder::Calculations.distance_between(@station.coordinates, s.coordinates).round(2)) %>km) </li>
 	  <% end %>
 	<% else %>
 		<p> No stations found in a radius of 25km. </p>
