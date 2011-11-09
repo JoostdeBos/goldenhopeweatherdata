@@ -25,6 +25,8 @@ GoldenHope::Application.routes.draw do
 
   match 'datasetthree' => 'stations#map'
 
+  match 'realtimechart' => 'stations#realtimechart'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
