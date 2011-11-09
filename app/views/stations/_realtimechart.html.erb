@@ -1,0 +1,80 @@
+<script type="text/javascript" chartset="utf-8">
+Highcharts.setOptions({
+   global: {
+      useUTC: false
+   }
+});
+   
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'temperature_chart',
+         defaultSeriesType: 'spline',
+         marginRight: 10,
+         events: {
+            load: function() {
+   
+               // set up the updating of the chart each second
+               var series = this.series[0];
+               setInterval(function() {
+                  var x = (new Date()).getTime(), // current time
+                     y = Math.random(); // call function to add new data to the graph
+                  series.addPoint([x, y], true, true);
+               }, 60000);
+            }
+         }
+      },
+      title: {
+         text: 'Cloud coverage'
+      },
+      xAxis: {
+         type: 'datetime',
+         tickPixelInterval: 150
+      },
+      yAxis: {
+         title: {
+            text: 'Value'
+         },
+         plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+         }]
+      },
+      tooltip: {
+         formatter: function() {
+                   return '<b>'+ this.series.name +'</b><br/>'+
+               Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+ 
+               Highcharts.numberFormat(this.y, 2);
+         }
+      },
+      legend: {
+         enabled: false
+      },
+      exporting: {
+         enabled: false
+      },
+      series: [{
+         name: 'Cloud coverage',
+         data: (function() {
+            // generate an array of random data
+            var data = [],
+               time = (new Date()).getTime(),
+               i,
+               clouddata = <%= @all_clouds.inspect %>;
+            
+            for (i = 0; i < clouddata.length; i++) {
+               data.push({
+                  x: time + i * 60 * 1000,
+                  y: clouddata[i]
+               });
+            }
+            return data;
+         })()
+      }]
+   });
+   
+   
+});
+</script>

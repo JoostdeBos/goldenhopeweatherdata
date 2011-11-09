@@ -48,11 +48,6 @@ $(document).ready(function() {
       series: [{
          pointInterval: <%= 1.hour * 1000 %>,
          pointStart: <%= 5.days.ago.to_i * 1000 %>,
-         name: "Temperature",
-         data: <%= @all_temps.inspect %>
-      }, {
-         pointInterval: <%= 1.hour * 1000 %>,
-         pointStart: <%= 5.days.ago.to_i * 1000 %>,
          name: "Cloud coverage",
          type: 'column',
          yAxis: 1,
