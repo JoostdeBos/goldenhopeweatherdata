@@ -29,6 +29,7 @@ class StationsController < ApplicationController
       end
   end
 
+
   def all_to_xml
   @stations = Station.all.limit(250)
   send_data @stations.to_xml,
@@ -37,7 +38,9 @@ class StationsController < ApplicationController
   end
 
   def map
-    @json = Station.all.limit(1000).to_a.to_gmaps4rails
+    @json = Station.all.limit(100).to_a.to_gmaps4rails do |station, marker| 
+      marker.json "\"id\": \"#{station.id}\""
+    end
   end
 
   def load_chart
