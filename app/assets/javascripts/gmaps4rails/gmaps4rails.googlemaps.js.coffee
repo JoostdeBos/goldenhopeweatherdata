@@ -210,6 +210,13 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
   #/////////////////// INFO WINDOW ////////////////////
   #////////////////////////////////////////////////////
 
+  #// loads a chart in a modal (popup), this should probably not go in here but I can't get the callback to work anywhere else
+  getChart : (station_id) ->
+    $("#chart-modal").modal "show"
+    url = "load_chart?station_id=" + station_id
+    new_html = "<a href='#' data-controls-modal='chart-modal'>Show chart</a>"
+    $("#chart-container").load url, ->
+
   #// creates infowindows
   createInfoWindow : (marker_container) ->    
     if typeof(@jsTemplate) == "function" or marker_container.description?
@@ -222,12 +229,16 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
         marker_container.infowindow = new InfoBox(@infobox(boxText))
         currentMap = this
         google.maps.event.addListener(marker_container.serviceObject, 'click', @openInfoWindow(currentMap, marker_container.infowindow, marker_container.serviceObject))
+        #loads a modal with a chart instead of the infowindow
+        google.maps.event.addListener(marker_container.serviceObject, 'click', -> getChart marker_container.id)
       else
         #create default infowindow
         marker_container.infowindow = new google.maps.InfoWindow({content: marker_container.description })
         #add the listener associated
         currentMap = this
         google.maps.event.addListener(marker_container.serviceObject, 'click', @openInfoWindow(currentMap, marker_container.infowindow, marker_container.serviceObject))
+        #loads a modal with a chart instead of the infowindow
+        google.maps.event.addListener(marker_container.serviceObject, 'click', -> getChart marker_container.id)
 
   openInfoWindow : (currentMap, infoWindow, marker) ->
     return ->
