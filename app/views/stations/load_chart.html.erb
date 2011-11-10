@@ -1,8 +1,8 @@
-<div class="modal-backdrop fade in"></div>
+pi<div class="modal-backdrop fade in"></div>
 <div id="chart-modal" class="modal hide fade in" style="display: block; ">
   <div class="modal-header">
     <a href="#" class="close" id="close">×</a>
-    <h3><%= "#{@station.city.capitalize}, #{@station.country.capitalize}" %></h3>
+    <h3><%= link_to "#{@station.city.capitalize}, #{@station.country.capitalize}", @station %></h3>
   </div>
   <div class="modal-body">
     <p> <%= render 'realtimechart' %> <p>
