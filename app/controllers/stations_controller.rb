@@ -4,15 +4,9 @@ class StationsController < ApplicationController
   def index
     #if we're searching for something
     if params[:search].present?
-      #if we're searching with a distance, use that
-      if params[:distance].present?
-         @stations = Station.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
-        #otherwise, search within 50km
-       else
-        @stations = Station.near(params[:search], 50, :units => :km, :order => :distance).page(params[:page]).per(25)
-      end
-    #else show all (paged at 25 stations per page)
+      @stations = Station.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
     else
+      #if we are not searching show all
       @stations = Station.all.page(params[:page]).per(25)
     end
   end
