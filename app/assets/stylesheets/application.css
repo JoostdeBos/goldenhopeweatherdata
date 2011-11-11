@@ -37,3 +37,9 @@
 footer {
 	text-align: center;
 }
+
+.logo {
+	float: left;
+	padding-right: 5px;
+	padding-top: 3px;
+}
