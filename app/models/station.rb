@@ -8,7 +8,7 @@ class Station
   after_validation :geocode          # geocoder wants this but we already have all coordinates
   acts_as_gmappable
 
-  field :id,          :type => String
+  field :stn,         :type => Integer
   field :address,     :type => String
   field :city,        :type => String
   field :country,     :type => String

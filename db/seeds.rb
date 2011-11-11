@@ -9,19 +9,18 @@
 require 'csv'
 
 #fill the database with all the stations
-# Station.delete_all
-# CSV.open('/Users/jurrestender/golden_hope/db/stations.csv', 'r', ';').each do |row|
-#   	station = Station.create!(
-# 		:station_id => row[0], 
-# 		:address =>"#{row[1]}, #{row[2]}", 
-# 		:city => row[1], 
-# 		:country => row[2], 
-# 		:latitude => row[3], 
-# 		:longitude => row[4],
-# 		:elevation => row[5],
-# 		:gmaps => true)
-# end
-
+Station.delete_all
+CSV.open('/Users/jurrestender/golden_hope/db/stations.csv', 'r', ';').each do |row|
+  	station = Station.create!(
+		:stn => row[0], 
+		:address =>"#{row[1]}, #{row[2]}", 
+		:city => row[1], 
+		:country => row[2], 
+		:latitude => row[3], 
+		:longitude => row[4],
+		:elevation => row[5],
+		:gmaps => true)
+end
 
 for station in Station.all
 	for i in 1..2
