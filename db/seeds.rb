@@ -37,6 +37,7 @@ end
 # 			:snow => rand * 10,
 # 			:cloudcoverage => rand * 75,
 # 			:winddir => rand(360))]
+<<<<<<< HEAD
 # 		station.save
 # 	end
 # end
@@ -57,11 +58,33 @@ end
 # 			:sndp => rand * 20,
 # 			:cldc => rand * 10,
 # 			:wnddir => rand(360))]
+=======
+>>>>>>> 823088733f49fb7f5f9b464fa8c914b26a97861c
 # 		station.save
-
-# 		days =+ 1
 # 	end
 # end
+
+for station in Station.all.limit(250)
+	for i in 1..7
+		date = 7.days.ago
+		days_ago = 0
+		station.datasetones << [Datasetone.new(
+			:date => date + days_ago.day, #increment one day each iteration
+			:temp => rand * 10 + 10, #random between 10 and 20
+			:dewp => rand * 40, 
+			:stp => rand * 1000,
+			:slp => rand * 945,
+			:visib => rand * 100,
+			:wdsp => rand * 40,
+			:prcp => rand * 5 + 5, #random between 5 and 10
+			:sndp => rand * 20,
+			:cldc => rand * 10,
+			:wnddir => rand(360))]
+		station.save
+
+		days =+ 1
+	end
+end
 
 		
 #create an admin user, uncomment when running for the first time

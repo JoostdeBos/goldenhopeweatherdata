@@ -30,7 +30,11 @@ class Station
 
   scope :dataset_one, where(:datasetones.exists => true)
 
+<<<<<<< HEAD
   attr_accessible :stn, :address, :city, :country, :latitude, :longitude, :elevation, :gmaps, :location, :coordinates
+=======
+  attr_accessible :stn, :address, :city, :country, :latitude, :longitude, :elevation, :gmaps
+>>>>>>> 823088733f49fb7f5f9b464fa8c914b26a97861c
 
   
   geo_index :location

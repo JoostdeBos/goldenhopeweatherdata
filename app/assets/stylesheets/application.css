@@ -38,6 +38,7 @@ footer {
 	text-align: center;
 }
 
+<<<<<<< HEAD
 .ui-datepicker-calendar {
 	background-color: whiteSmoke;
 }
@@ -103,4 +104,10 @@ footer {
 
 .ui-datepicker-today a {
 	color: white;
+=======
+.logo {
+	float: left;
+	padding-right: 5px;
+	padding-top: 3px;
+>>>>>>> 823088733f49fb7f5f9b464fa8c914b26a97861c
 }
