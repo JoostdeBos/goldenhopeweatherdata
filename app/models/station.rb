@@ -19,7 +19,7 @@ class Station
   field :location,    :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   field :coordinates, :type => Array, :lat => :latitude, :lng => :longitude
   has_many :measurements
-  has_many :datasetones
+  embeds_many :datasetones
   index(
     [
       [ :id, Mongo::ASCENDING ],

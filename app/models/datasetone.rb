@@ -1,7 +1,7 @@
 class Datasetone
   include Mongoid::Document
 
-  belongs_to :station
+  embedded_in :station
 
   field :stn, 		:type => Integer
   field :date, 		:type => DateTime

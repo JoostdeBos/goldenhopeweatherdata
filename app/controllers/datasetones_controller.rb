@@ -3,19 +3,21 @@ class DatasetonesController < ApplicationController
 
 	def index
     #if we're searching for something
-    if params[:search].present?
-      #if we're searching with a distance, use that
-      if params[:distance].present?
-         @stations = Station.dataset_one.near(params[:search], params[:distance], :units => :km, :order => :distance).page(params[:page]).per(25)
-        #otherwise, search within 50km
+    if params[:date].present?
+      if params[:search].present?
+        @stations = Station.dataset_one.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}, {:datasetone.date => params[:date]}).page(params[:page]).per(25)
       else
-        @stations = Station.dataset_one.near(params[:search], 50, :units => :km, :order => :distance).page(params[:page]).per(25)
+        #if we are not searching show all
+        @stations = Station.dataset_one.any_of({:datasetone.date => params[:date]}).page(params[:page]).per(25)
       end
-    #when there are no search params show all (paged at 25 stations per page)
+    elsif params[:search].present?
+      @stations = Station.dataset_one.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
     else
-      @stations = Station.dataset_one.all.page(params[:page]).per(25)
+      @stations = Station.dataset_one.any_of({:datasetones.last.date => Date.now}).page(params[:page]).per(25)
     end
   end
+
+
 
   def show
   	@station = Station.find(params[:id])
