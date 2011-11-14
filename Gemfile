@@ -27,8 +27,6 @@ gem "bson_ext"
 
 gem 'client_side_validations'
 
-gem 'rack-ssl'
-
 group :development do
 	gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git', :require => 'rails_development_boost'
 end

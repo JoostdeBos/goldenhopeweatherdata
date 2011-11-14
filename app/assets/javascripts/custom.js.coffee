@@ -8,3 +8,8 @@ $(document).ready ->
 	$(".close").click ->
   	$("#chart-modal, .modal-backdrop").fadeOut 300, ->
   		$(this).remove()
+  
+  $ ->
+	  $("#datepicker").datepicker
+	    minDate: -20
+	    maxDate: +0

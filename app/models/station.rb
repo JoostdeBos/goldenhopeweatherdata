@@ -19,7 +19,7 @@ class Station
   field :location,    :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   field :coordinates, :type => Array, :lat => :latitude, :lng => :longitude
   has_many :measurements
-  embeds_many :datasetones
+  has_many :datasetones
   index(
     [
       [ :id, Mongo::ASCENDING ],
@@ -30,7 +30,7 @@ class Station
 
   scope :dataset_one, where(:datasetones.exists => true)
 
-  attr_accessible :id, :address, :city, :country, :latitude, :longitude, :elevation, :gmaps
+  attr_accessible :stn, :address, :city, :country, :latitude, :longitude, :elevation, :gmaps, :location, :coordinates
 
   
   geo_index :location

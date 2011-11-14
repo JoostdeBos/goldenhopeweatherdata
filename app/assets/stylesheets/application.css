@@ -37,3 +37,70 @@
 footer {
 	text-align: center;
 }
+
+.ui-datepicker-calendar {
+	background-color: whiteSmoke;
+}
+
+.ui-datepicker-calendar thead {
+	background-color: #EEE;
+}
+
+.ui-datepicker-header {
+	width: 235px;
+	display: inline-block;
+	background-color: #E6E6E6;
+	background-repeat: no-repeat;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(#ffffff, #ffffff 40%, #e6e6e6);
+	background-image: -moz-linear-gradient(top, #ffffff, #ffffff 40%, #e6e6e6);
+	background-image: -ms-linear-gradient(#ffffff, #ffffff 40%, #e6e6e6);
+	background-image: -o-linear-gradient(#ffffff, #ffffff 40%, #e6e6e6);
+	background-image: linear-gradient(#ffffff, #ffffff 40%, #e6e6e6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+	padding: 5px 14px 6px;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	color: #333;
+	font-size: 13px;
+	line-height: normal;
+	border: 1px solid #CCC;
+	border-bottom-color: #BBB;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.ui-datepicker-prev {
+	cursor: pointer;
+	float: left;
+}
+
+.ui-datepicker-next {
+	cursor: pointer;
+	float: right;
+}
+
+.ui-datepicker-title {
+	text-align: center;
+}
+
+.ui-datepicker-today {
+	color: white;
+	background-color: #0064CD;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+	background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+	background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+	background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+	background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+	background-image: linear-gradient(top, #049cdb, #0064cd);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	border-color: #0064CD #0064CD #003F81;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.ui-datepicker-today a {
+	color: white;
+}
