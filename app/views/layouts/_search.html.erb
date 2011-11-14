@@ -3,7 +3,8 @@
   	<span class="add-on">Date</span>
 		<%= text_field_tag :date, params[:date], :placeholder => 'Select a date', :id => 'datepicker' %>
 	</div>
-      <span class="add-on">Search</span>
+	<div class="input-prepend" style=" float: left; padding-right: 10px;">
+      <span class="add-on">Place</span>
       <% 	if params[:search]
       			placeholder = params[:search]
       		else
