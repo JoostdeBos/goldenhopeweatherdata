@@ -7,6 +7,8 @@ GoldenHope::Application.routes.draw do
 
   resources :users
 
+  resources :datasettwos
+
   root :to => 'stations#index'
 
   match 'user/edit' => 'users#edit', :as => :edit_current_user

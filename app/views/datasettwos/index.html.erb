@@ -1,0 +1,25 @@
+<% title "Dataset one" %>
+
+<%= render 'search' %>
+
+<%= paginate @stations %>
+
+<%= link_to "Download as XML", :datasetone_to_xml, :class => "btn", :style => "float: right; margin-top: -45px; /*lol haxx*/" %>
+<table class="zebra-striped">
+  <tr>
+    <th>Country</th>
+    <th>City</th>
+    <th>Peak temperature</th>
+    <th>Latitude</th>
+    <th>Show</th>
+  </tr>
+  <% for station in @stations %>
+    <tr>
+      <td><%= station.country.capitalize! %></td>
+      <td><%= station.city.capitalize! %></td>
+      <td><%= station.datasettwos.last.temp.round(1) %>&deg;C </td>
+      <td><%= station.latitude %>&deg; </td>
+      <td><%= link_to "Show", "datasettwos/#{station.id}" %></td>
+    </tr>
+  <% end %>
+</table>

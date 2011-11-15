@@ -4,10 +4,10 @@ class StationsController < ApplicationController
   def index
     #if we're searching for something
     if params[:search].present?
-      @stations = Station.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      @stations = Station.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).asc(:address).page(params[:page]).per(25)
     else
       #if we are not searching show all
-      @stations = Station.all.page(params[:page]).per(25)
+      @stations = Station.all.asc(:address).page(params[:page]).per(25)
     end
   end
 
@@ -32,7 +32,7 @@ class StationsController < ApplicationController
   end
 
   def map
-    @json = Station.all.limit(100).to_a.to_gmaps4rails do |station, marker| 
+    @json = Station.all.limit(4000).to_a.to_gmaps4rails do |station, marker| 
       marker.json "\"id\": \"#{station.id}\""
     end
   end

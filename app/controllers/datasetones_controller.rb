@@ -4,9 +4,9 @@ class DatasetonesController < ApplicationController
 	def index
     if params[:date].present?
       if params[:search].present?
-        @stations = Station.dataset_one_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
       else
-        @stations = Station.dataset_one_on_date(params[:date].to_time).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day).page(params[:page]).per(25)
       end
     elsif params[:search].present?
       @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
@@ -27,21 +27,25 @@ class DatasetonesController < ApplicationController
       end
   end
 
+  #this should be a lot cleaner, the without method should be invoked somewhere in the scope but hackedyhack before deadlines
   def datasetone_to_xml
     if params[:date].present?
+      date = params[:date]
       if params[:search].present?
-        @stations = Station.dataset_one_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).without(:datasettwos, :datasetthrees)
       else
-        @stations = Station.dataset_one_on_date(params[:date].to_time).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day)without(:datasettwos, :datasetthrees)
       end
     elsif params[:search].present?
-      @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      date = Time.now
+      @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).without(:datasettwos, :datasetthrees)
     else
-      @stations = Station.dataset_one_on_date(Time.now).page(params[:page]).per(25)
+      date = Time.now
+      @stations = Station.dataset_one_on_date(Time.now).page(params[:page]).without(:datasettwos, :datasetthrees)
     end
     send_data @stations.to_xml,
     :type => 'text/xml; charset=UTF-8;',
-    :disposition => "attachment; filename=stations.xml"
+    :disposition => "attachment; filename=datasetone #{date}.xml"
   end
 
 end

@@ -1,0 +1,34 @@
+<% title @station.city.capitalize %> 
+
+<div class="span10"
+<p>
+  <strong>Country:</strong>
+  <%= @station.country.capitalize! %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @station.city.capitalize! %>
+</p>
+<p>
+  <strong>Latitude:</strong>
+  <%= @station.latitude %>
+</p>
+<p>
+  <strong>Longitude:</strong>
+  <%= @station.longitude %>
+</p>
+<p>
+  <strong>Elevation:</strong>
+  <%= @station.elevation %>
+</p>
+
+<!-- Google static map image -->
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}" %>
+
+<%= render 'weatherdata' %>
+
+<%= render 'chart' %>
+</div>
+
+<!-- div to render graph in -->
+<div id="temperature_chart" style="width:580px; height:300px; margin-top:200px;"></div>

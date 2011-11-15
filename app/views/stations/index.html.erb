@@ -15,8 +15,8 @@
   </tr>
   <% for station in @stations %>
     <tr>
-      <td><%= station.country.capitalize! %></td>
-      <td><%= station.city.capitalize! %></td>
+      <td><%= station.country.capitalize! if station.country %></td>
+      <td><%= station.city.capitalize! if station.city %></td>
       <td><%= link_to "Show", station %></td>
     </tr>
   <% end %>
