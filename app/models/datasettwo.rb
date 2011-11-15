@@ -5,7 +5,7 @@ class Datasettwo
   embedded_in :station, :inverse_of => :datasettwos
 
   field :stn, 		:type => Integer
-  field :date, 		:type => Time
+  field :date, 		:type => Date
   field :temp, 		:type => Float
   field :dewp, 		:type => Float
   field :stp, 		:type => Float
