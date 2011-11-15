@@ -62,11 +62,13 @@ $(document).ready(function() {
             var data = [],
                time = (new Date()).getTime(),
                i,
+
                clouddata = <%= @all_clouds.inspect %>;
-            
+               date = <%= @all_dates.inspect %>;
+
             for (i = 0; i < clouddata.length; i++) {
                data.push({
-                  x: time + i * 60 * 1000,
+                  x: date[i] + i * 60 * 1000,
                   y: clouddata[i]
                });
             }

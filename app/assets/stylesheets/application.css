@@ -110,3 +110,8 @@ footer {
 	padding-right: 5px;
 	padding-top: 3px;
 }
+
+th.ui-datepicker-week-end,
+td.ui-datepicker-week-end {
+    display: none;
+}

@@ -1,6 +1,6 @@
 class StationsController < ApplicationController
 	before_filter :login_required
-
+      
   def index
     #if we're searching for something
     if params[:search].present?
@@ -13,11 +13,11 @@ class StationsController < ApplicationController
 
   def show
   	@station = Station.find(params[:id])
-    @measurement = @station.measurements.last
+    @measurement = @station.datasetones.last
     @all_temps = []
     @all_clouds = []
     #build graph data
-      @station.measurements.each do |m|
+      @station.datasetones.each do |m|
         @all_temps << m.temp.round(2)
         @all_clouds << m.cloudcoverage.round(2)
       end
@@ -38,14 +38,18 @@ class StationsController < ApplicationController
   end
 
   def load_chart
+
     @station = Station.find(params[:station_id]) 
-    @measurement = @station.measurements.last
+    @measurement = @station.datasetones.last
     @all_clouds = []
+    @all_dates = []
     #build graph data
-    @station.measurements.order(:desc).limit(15).each do |m|
+    @station.datasetones.order(:desc).limit(15).each do |m|
       @all_clouds << m.cloudcoverage
+      @all_dates << m.date.to_i
     end
     @all_clouds.reverse
+    @all_dates.reverse
   end
   
 end

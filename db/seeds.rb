@@ -8,38 +8,38 @@
   
 require 'csv'
 
-# fill the database with all the stations
-Station.delete_all
-CSV.open('/Users/jurrestender/golden_hope/db/stations-short.csv', 'r', ';').each do |row|
-  	station = Station.create!(
-		:stn => row[0], 
-		:address =>"#{row[1]}, #{row[2]}", 
-		:city => row[1], 
-		:country => row[2], 
-		:latitude => row[3], 
-		:longitude => row[4],
-		:elevation => row[5],
-		:gmaps => true)
-end
+# # fill the database with all the stations
+# Station.delete_all
+# CSV.open('/Users/jurrestender/golden_hope/db/stations-short.csv', 'r', ';').each do |row|
+#   	station = Station.create!(
+# 		:stn => row[0], 
+# 		:address =>"#{row[1]}, #{row[2]}", 
+# 		:city => row[1], 
+# 		:country => row[2], 
+# 		:latitude => row[3], 
+# 		:longitude => row[4],
+# 		:elevation => row[5],
+# 		:gmaps => true)
+# end
 
-for station in Station.all
-	for i in 1..2
-		station.measurements << [Measurement.new(
-			:date => DateTime.now, 
-			:utime => Time.now, 
-			:temp => rand * 50, 
-			:dewpoint => rand * 40, 
-			:airpressure => rand * 1000,
-			:stationpressure => rand * 945,
-			:visibility => rand * 100,
-			:windspeed => rand * 40,
-			:precipitation => rand * 20,
-			:snow => rand * 10,
-			:cloudcoverage => rand * 75,
-			:winddir => rand(360))]
-		station.save
-	end
-end
+# for station in Station.all
+# 	for i in 1..2
+# 		station.measurements << [Measurement.new(
+# 			:date => DateTime.now, 
+# 			:utime => Time.now, 
+# 			:temp => rand * 50, 
+# 			:dewpoint => rand * 40, 
+# 			:airpressure => rand * 1000,
+# 			:stationpressure => rand * 945,
+# 			:visibility => rand * 100,
+# 			:windspeed => rand * 40,
+# 			:precipitation => rand * 20,
+# 			:snow => rand * 10,
+# 			:cloudcoverage => rand * 75,
+# 			:winddir => rand(360))]
+# 		station.save
+# 	end
+# end
 
 for station in Station.all.limit(250)
 	date = Time.now.utc - 7.days

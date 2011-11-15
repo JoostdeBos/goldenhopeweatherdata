@@ -1,8 +1,9 @@
 <%= form_tag datasetones_path, :method => :get do %>
   <div class="input-prepend" style=" float: left; padding-right: 10px;">
   	<span class="add-on">Date</span>
-		<%= text_field_tag :date, params[:date], :placeholder => 'Select a date', :id => 'datepicker' %>
+		 <%= text_field_tag :date, params[:date], :placeholder => 'Select a date', :id => 'datepicker', :autocomplete => 'off' %>
 	</div>
+ 
 	<div class="input-prepend" style=" float: left; padding-right: 10px;">
       <span class="add-on">Place</span>
       <% 	if params[:search]

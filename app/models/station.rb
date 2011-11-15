@@ -20,7 +20,7 @@ class Station
   field :gmaps,       :type => Boolean
   field :location,    :type => Array, :geo => true, :lat => :latitude, :lng => :longitude
   field :coordinates, :type => Array, :lat => :latitude, :lng => :longitude
-  has_many :measurements
+  has_many :datasetones
   embeds_many :datasetones
   embeds_many :datasettwos
   index(
