@@ -50,6 +50,9 @@ class StationsController < ApplicationController
     end
     @all_clouds.reverse
     @all_dates.reverse
+    respond_to do |format|
+      format.js { render :layout => false }
+    end
   end
   
 end
