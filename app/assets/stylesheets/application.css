@@ -122,6 +122,10 @@ footer {
 	border:none;
 }
 
+.image_map {
+	margin-bottom:25px;
+}
+
 th.ui-datepicker-week-end,
 td.ui-datepicker-week-end {
     display: none;

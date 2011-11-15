@@ -1,6 +1,6 @@
 
   <h2>Weatherdata</h2>
-  <h5><small>Last updated one second ago </small></h5>
+  <h5><small>Last updated <%= time_ago_in_words(@measurements.last.date) %> ago</small></h5>
   <table class="small_text zebra-striped">
   <th></th>
   <th>Temperature</th>
