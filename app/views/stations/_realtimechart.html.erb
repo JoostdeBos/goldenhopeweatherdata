@@ -15,11 +15,11 @@ $(document).ready(function() {
          events: {
             load: function() {
    
-               // set up the updating of the chart each second
+               // set up the updating of the chart each minute
                var series = this.series[0];
                setInterval(function() {
                   var x = (new Date()).getTime(), // current time
-                     y = Math.random(); // call function to add new data to the graph
+                     y = <%= @measurement["cldc"] %>; // call function to add new data to the graph
                   series.addPoint([x, y], true, true);
                }, 60000);
             }
@@ -45,7 +45,7 @@ $(document).ready(function() {
       tooltip: {
          formatter: function() {
                    return '<b>'+ this.series.name +'</b><br/>'+
-               Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+ 
+               Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'<br/>'+ 
                Highcharts.numberFormat(this.y, 2);
          }
       },
@@ -72,6 +72,7 @@ $(document).ready(function() {
                   y: clouddata[i]
                });
             }
+            
             return data;
          })()
       }]
