@@ -111,6 +111,17 @@ footer {
 	padding-top: 3px;
 }
 
+.small_text th {
+	width: 55px;
+	font-size:10px;
+	width:20px;
+	-webkit-transform: rotate(-80deg); 
+	-moz-transform: rotate(-80deg);	
+	padding-top:50px;
+	padding-bottom:50px;
+	border:none;
+}
+
 th.ui-datepicker-week-end,
 td.ui-datepicker-week-end {
     display: none;

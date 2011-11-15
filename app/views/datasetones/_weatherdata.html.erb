@@ -1,7 +1,7 @@
 
   <h2>Weatherdata</h2>
   <h5><small>Last updated one second ago </small></h5>
-  <table>
+  <table class="small_text zebra-striped">
   <th></th>
   <th>Temperature</th>
   <th>Dewpoint</th>
@@ -13,17 +13,19 @@
   <th>Snowlevel</th>
   <th>Cloudcoverage</th>
   <th>Winddirection</th>
+  <% for measurement in @measurements%>
   <tr>
-    <td><strong><%= @measurement.date.strftime('%m/%d/%Y') %></strong></td>
-    <td><%= @measurement.temp.round(1) %></td>
-    <td><%= @measurement.dewp.round(1) %></td>
-    <td><%= @measurement.stp.round(1) %></td>
-    <td><%= @measurement.slp.round(1) %></td>
-    <td><%= @measurement.visib.round(1) %></td>
-    <td><%= @measurement.wdsp.round(1) %></td>
-    <td><%= @measurement.prcp.round(1) %></td>
-    <td><%= @measurement.sndp.round(1) %></td>
-    <td><%= @measurement.cldc.round(1) %></td>
-    <td><%= @measurement.wnddir.round %> </td>
+    <td><strong><%= measurement.date.strftime('%m/%d/%Y') %></strong></td>
+    <td><%= measurement.temp.round(1) %></td>
+    <td><%= measurement.dewp.round(1) %></td>
+    <td><%= measurement.stp.round(1) %></td>
+    <td><%= measurement.slp.round(1) %></td>
+    <td><%= measurement.visib.round(1) %></td>
+    <td><%= measurement.wdsp.round(1) %></td>
+    <td><%= measurement.prcp.round(1) %></td>
+    <td><%= measurement.sndp.round(1) %></td>
+    <td><%= measurement.cldc.round(1) %></td>
+    <td><%= measurement.wnddir.round %> </td>
   </tr>
+  <% end %>
   </table>
