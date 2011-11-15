@@ -1,5 +1,5 @@
 <div class="modal-backdrop fade in"></div>
-<div id="chart-modal" class="modal hide fade in" style="display: block; ">
+<div id="chart-modal" class="modal hide fade in" onClick="$('#chart-modal, .modal-backdrop').fadeOut(300, function() {return $(this).remove();});" style="display: block; ">
   <div class="modal-header">
     <a href="#" class="close" id="close">×</a>
     <h3><%= link_to "#{@station.city.capitalize}, #{@station.country.capitalize}", @station %></h3>

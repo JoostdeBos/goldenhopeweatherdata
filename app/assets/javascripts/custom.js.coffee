@@ -5,8 +5,8 @@ $(document).ready ->
   $(".close").click ->
     $(".alert-message").slideUp 1000, ->
 
-	$(".close").click ->
-  	$("#chart-modal, .modal-backdrop").fadeOut 300, ->
+	$("#close").click ->
+    $("#chart-modal, .modal-backdrop").fadeOut 300, ->
   		$(this).remove()
   
   $ ->
