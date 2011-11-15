@@ -5,7 +5,7 @@ class Datasetone
   embedded_in :station, :inverse_of => :datasetones
 
   field :stn, 		:type => Integer
-  field :date, 		:type => Time
+  field :date, 		:type => Date
   field :temp, 		:type => Float
   field :dewp, 		:type => Float
   field :stp, 		:type => Float

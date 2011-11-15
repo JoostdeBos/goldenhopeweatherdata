@@ -1,5 +1,4 @@
-	</div>
-	<div class="span4">
+
   <h2>Weatherdata</h2>
   <h5><small>Last updated one second ago </small></h5>
   <table>
@@ -15,7 +14,7 @@
   <th>Cloudcoverage</th>
   <th>Winddirection</th>
   <tr>
-    <td><strong>Date<%= @measurement.date %></strong></td>
+    <td><strong><%= @measurement.date.strftime('%m/%d/%Y') %></strong></td>
     <td><%= @measurement.temp.round(1) %></td>
     <td><%= @measurement.dewp.round(1) %></td>
     <td><%= @measurement.stp.round(1) %></td>
@@ -28,11 +27,3 @@
     <td><%= @measurement.wnddir.round %> </td>
   </tr>
   </table>
-  <h2> Nearby stations </h2>
-  <% if @station.nearbys(25).any? %>
-	  <% for s in @station.nearbys(25) %>
-	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (Geocoder::Calculations.distance_between(@station.coordinates, s.coordinates).round(2)) %>km) </li>
-	  <% end %>
-	<% else %>
-		<p> No stations found in a radius of 25km. </p>
-	<% end %>

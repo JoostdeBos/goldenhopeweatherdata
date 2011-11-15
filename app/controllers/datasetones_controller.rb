@@ -34,7 +34,7 @@ class DatasetonesController < ApplicationController
       if params[:search].present?
         @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).without(:datasettwos, :datasetthrees)
       else
-        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day)without(:datasettwos, :datasetthrees)
+        @stations = Station.dataset_one_on_date(params[:date].to_time + 1.day).without(:datasettwos, :datasetthrees)
       end
     elsif params[:search].present?
       date = Time.now
