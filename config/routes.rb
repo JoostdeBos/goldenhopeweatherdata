@@ -23,6 +23,8 @@ GoldenHope::Application.routes.draw do
 
   match 'download_all_xml' => 'stations#all_to_xml'
 
+  match 'datasetone_to_xml' => 'datasetones#datasetone_to_xml'
+
   match 'datasetthree' => 'stations#map'
 
   match 'realtimechart' => 'stations#realtimechart'

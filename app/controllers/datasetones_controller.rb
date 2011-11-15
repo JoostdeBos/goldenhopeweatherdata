@@ -2,22 +2,18 @@ class DatasetonesController < ApplicationController
 	before_filter :login_required
 
 	def index
-    #if we're searching for something
     if params[:date].present?
       if params[:search].present?
-        @stations = Station.dataset_one.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}, {:datasetone.date => params[:date]}).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
       else
-        #if we are not searching show all
-        @stations = Station.dataset_one.any_of({:datasetone.date => params[:date]}).page(params[:page]).per(25)
+        @stations = Station.dataset_one_on_date(params[:date].to_time).page(params[:page]).per(25)
       end
     elsif params[:search].present?
-      @stations = Station.dataset_one.any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
     else
-      @stations = Station.dataset_one.any_of({:datasetones.last.date => Date.now}).page(params[:page]).per(25)
+      @stations = Station.dataset_one_on_date(Time.now).page(params[:page]).per(25)
     end
   end
-
-
 
   def show
   	@station = Station.find(params[:id])
@@ -29,6 +25,23 @@ class DatasetonesController < ApplicationController
         @all_temps << dataset.temp.round(2)
         @all_prcp << dataset.prcp.round(2)
       end
+  end
+
+  def datasetone_to_xml
+    if params[:date].present?
+      if params[:search].present?
+        @stations = Station.dataset_one_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      else
+        @stations = Station.dataset_one_on_date(params[:date].to_time).page(params[:page]).per(25)
+      end
+    elsif params[:search].present?
+      @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+    else
+      @stations = Station.dataset_one_on_date(Time.now).page(params[:page]).per(25)
+    end
+    send_data @stations.to_xml,
+    :type => 'text/xml; charset=UTF-8;',
+    :disposition => "attachment; filename=stations.xml"
   end
 
 end

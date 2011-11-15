@@ -1,10 +1,10 @@
 <% title "Dataset one" %>
 
-<%= render 'layouts/search' %>
+<%= render 'search' %>
 
 <%= paginate @stations %>
 
-<%= link_to "Download as XML", :download_all_xml, :class => "btn", :style => "float: right; margin-top: -45px; /*lol haxx*/" %>
+<%= link_to "Download as XML", :datasetone_to_xml, :class => "btn", :style => "float: right; margin-top: -45px; /*lol haxx*/" %>
 <table class="zebra-striped">
   <tr>
     <th>Country</th>

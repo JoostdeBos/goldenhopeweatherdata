@@ -13,3 +13,4 @@ $(document).ready ->
 	  $("#datepicker").datepicker
 	    minDate: -20
 	    maxDate: +0
+	    dateFormat: 'mm/dd/yy'

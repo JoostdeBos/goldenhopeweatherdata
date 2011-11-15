@@ -18,6 +18,4 @@ class Measurement
 	field :cloudcoverage, :type => Float
 	field :winddir, :type => Integer
 
-	
-
 end

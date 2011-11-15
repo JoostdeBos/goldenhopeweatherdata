@@ -1,10 +1,11 @@
 class Datasetone
   include Mongoid::Document
+  include Mongoid::MultiParameterAttributes
 
-  embedded_in :station
+  embedded_in :station, :inverse_of => :datasetones
 
   field :stn, 		:type => Integer
-  field :date, 		:type => DateTime
+  field :date, 		:type => Time
   field :temp, 		:type => Float
   field :dewp, 		:type => Float
   field :stp, 		:type => Float
@@ -15,4 +16,6 @@ class Datasetone
   field :sndp, 		:type => Float
   field :cldc, 		:type => Float
   field :wnddir, 	:type => Float
+
+
 end

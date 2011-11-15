@@ -1,6 +1,7 @@
 development:
   host: localhost
   database: golden_hope_development
+  use_utc: true
 
 test:
   host: localhost
