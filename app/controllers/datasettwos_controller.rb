@@ -17,7 +17,7 @@ class DatasettwosController < ApplicationController
 
   def show
   	@station = Station.find(params[:id])
-    @measurement = @station.datasettwos.last
+    @measurements = @station.datasettwos
     @all_temps = []
     @all_prcp = []
     #build graph data

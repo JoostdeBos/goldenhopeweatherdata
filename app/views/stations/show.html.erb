@@ -23,12 +23,10 @@
 </p>
 
 <!-- Google static map image -->
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}" %>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=5&markers=#{@station.latitude}%2C#{@station.longitude}", :class => "image_map" %>
 
 <%= render 'weatherdata' %>
 
+<%= render 'layouts/nearby' %>
 
 </div>
-
-<!-- div to render graph in -->
-<div id="temperature_chart" style="width:580px; height:300px; margin-top:200px;"></div>

@@ -13,13 +13,14 @@ class StationsController < ApplicationController
 
   def show
   	@station = Station.find(params[:id])
-    @measurement = @station.datasetones.last
+    @datasetthree = @station.datasetthrees
+    @datasets = [@station.datasetones, @station.datasettwos]
     @all_temps = []
     @all_clouds = []
     #build graph data
       @station.datasetones.each do |m|
         @all_temps << m.temp.round(2)
-        @all_clouds << m.cloudcoverage.round(2)
+        @all_clouds << m.cldc.round(2)
       end
   end
 
