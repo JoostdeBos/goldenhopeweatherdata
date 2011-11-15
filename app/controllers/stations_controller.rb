@@ -39,15 +39,14 @@ class StationsController < ApplicationController
   end
 
   def load_chart
-
     @station = Station.find(params[:station_id]) 
-    @measurement = @station.datasetones.last
+    @measurement = @station.datasetthrees.last
     @all_clouds = []
     @all_dates = []
     #build graph data
-    @station.datasetones.order(:desc).limit(15).each do |m|
-      @all_clouds << m.cloudcoverage
-      @all_dates << m.date.to_i
+    @station.datasetthrees.each do |m|
+      @all_clouds << m["cldc"]
+      @all_dates << m["date"].to_i
     end
     @all_clouds.reverse
     @all_dates.reverse

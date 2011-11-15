@@ -4,15 +4,16 @@ class DatasettwosController < ApplicationController
 	def index
     if params[:date].present?
       if params[:search].present?
-        @stations = Station.dataset_two_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+        stations = Station.dataset_two_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase})
       else
-        @stations = Station.dataset_two_on_date(params[:date].to_time + 1.day).page(params[:page]).per(25)
+        stations = Station.dataset_two_on_date(params[:date].to_time + 1.day)
       end
     elsif params[:search].present?
-      @stations = Station.dataset_two_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      stations = Station.dataset_two_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase})
     else
-      @stations = Station.dataset_two_on_date(Time.now).page(params[:page]).per(25)
+      stations = Station.dataset_two_on_date(Time.now)
     end
+    @stations = stations.page(params[:page]).per(25)
   end
 
   def show
@@ -27,21 +28,24 @@ class DatasettwosController < ApplicationController
       end
   end
 
-  def datasetone_to_xml
+  def datasettwo_to_xml
     if params[:date].present?
+      date = params[:date]
       if params[:search].present?
-        @stations = Station.dataset_one_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+        dataset = Station.dataset_two_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase})
       else
-        @stations = Station.dataset_one_on_date(params[:date].to_time).page(params[:page]).per(25)
+        dataset = Station.dataset_two_on_date(params[:date].to_time)
       end
     elsif params[:search].present?
-      @stations = Station.dataset_one_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+      date = Date.today
+      dataset = Station.dataset_two_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase})
     else
-      @stations = Station.dataset_one_on_date(Time.now).page(params[:page]).per(25)
+      date = Date.today
+      dataset = Station.dataset_two_on_date(Time.now)
     end
-    send_data @stations.to_xml,
+    send_data dataset.without(:datasetones, :datasetthrees).to_xml,
     :type => 'text/xml; charset=UTF-8;',
-    :disposition => "attachment; filename=stations.xml"
+    :disposition => "attachment; filename=iWeather Dataset Two #{date}.xml"
   end
 
 end
