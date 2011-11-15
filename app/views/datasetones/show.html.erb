@@ -1,6 +1,6 @@
 <% title @station.city.capitalize %> 
 
-<div class="span10"
+<div class="span10">
 <p>
   <strong>Country:</strong>
   <%= @station.country.capitalize! %>
@@ -27,8 +27,8 @@
 
 <%= render 'weatherdata' %>
 
-<%= render 'chart' %>
-</div>
+<%= render 'nearby' %>
+
 
 <!-- div to render graph in -->
 <div id="temperature_chart" style="width:580px; height:300px; margin-top:200px;"></div>

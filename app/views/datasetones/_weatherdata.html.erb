@@ -1,56 +1,29 @@
-	</div>
-	<div class="span4">
+
   <h2>Weatherdata</h2>
   <h5><small>Last updated one second ago </small></h5>
   <table>
-  <th>Type</th>
-  <th>Measured</td>
+  <th></th>
+  <th>Temperature</th>
+  <th>Dewpoint</th>
+  <th>Airpressure</th>
+  <th>Stationpressure</th>
+  <th>Visibility</th>
+  <th>Windspeed</th>
+  <th>Precipitation</th>
+  <th>Snowlevel</th>
+  <th>Cloudcoverage</th>
+  <th>Winddirection</th>
   <tr>
-    <td><strong>Temperature: </strong></td>
+    <td><strong><%= @measurement.date.strftime('%m/%d/%Y') %></strong></td>
     <td><%= @measurement.temp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Dewpoint: </strong></td>
     <td><%= @measurement.dewp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Airpressure: </strong></td>
     <td><%= @measurement.stp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Stationpressure: </strong></td>
     <td><%= @measurement.slp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Visibility: </strong></td>
     <td><%= @measurement.visib.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Windspeed: </strong></td>
     <td><%= @measurement.wdsp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Precipitation: </strong></td>
     <td><%= @measurement.prcp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Snowlevel: </strong></td>
     <td><%= @measurement.sndp.round(1) %></td>
-  </tr>
-  <tr>
-    <td><strong>Cloudcoverage: </strong></td>
-    <td><%= @measurement.cldc.round(1) %></tr>
-  </tr>
-  <tr>
-    <td><strong>Winddirection: </strong></td>
-    <td><%= @measurement.wnddir.round %> </p></td>
+    <td><%= @measurement.cldc.round(1) %></td>
+    <td><%= @measurement.wnddir.round %> </td>
   </tr>
   </table>
-  <h2> Nearby stations </h2>
-  <% if @station.nearbys(25).any? %>
-	  <% for s in @station.nearbys(25) %>
-	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (Geocoder::Calculations.distance_between(@station.coordinates, s.coordinates).round(2)) %>km) </li>
-	  <% end %>
-	<% else %>
-		<p> No stations found in a radius of 25km. </p>
-	<% end %>
