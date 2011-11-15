@@ -10,7 +10,7 @@
     <th>Country</th>
     <th>City</th>
     <th>Peak temperature</th>
-    <th>Precipitation</th>
+    <th>Latitude</th>
     <th>Show</th>
   </tr>
   <% for station in @stations %>
@@ -18,7 +18,7 @@
       <td><%= station.country.capitalize! %></td>
       <td><%= station.city.capitalize! %></td>
       <td><%= station.datasettwos.last.temp.round(1) %>&deg;C </td>
-      <td><%= station.datasettwos.last.prcp.round(1) %>mm </td>
+      <td><%= station.latitude %>&deg; </td>
       <td><%= link_to "Show", "datasettwos/#{station.id}" %></td>
     </tr>
   <% end %>

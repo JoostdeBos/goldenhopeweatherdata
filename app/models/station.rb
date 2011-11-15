@@ -44,7 +44,7 @@ class Station
   #
   scope :dataset_one_on_date, lambda {|date| where("datasetones.date" => {'$gte' => date - 1.day, '$lt' => date }) }
 
-  scope :dataset_two_on_date, lambda {|date| where("datasettwos.date" => {'$gte' => date - 1.day, '$lt' => date}) }
+  scope :dataset_two_on_date, lambda {|date| where("datasettwos.date" => {'$gte' => date - 1.day, '$lt' => date }) }
   
   geo_index :location
 

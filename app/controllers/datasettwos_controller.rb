@@ -4,9 +4,9 @@ class DatasettwosController < ApplicationController
 	def index
     if params[:date].present?
       if params[:search].present?
-        @stations = Station.dataset_two_on_date(params[:date].to_time).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
+        @stations = Station.dataset_two_on_date(params[:date].to_time + 1.day).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
       else
-        @stations = Station.dataset_two_on_date(params[:date].to_time).page(params[:page]).per(25)
+        @stations = Station.dataset_two_on_date(params[:date].to_time + 1.day).page(params[:page]).per(25)
       end
     elsif params[:search].present?
       @stations = Station.dataset_two_on_date(Time.now).any_of({:country => params[:search].upcase}, {:city => params[:search].upcase}).page(params[:page]).per(25)
