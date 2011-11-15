@@ -1,52 +1,40 @@
-	</div>
-	<div class="span4">
-  <h2>Weatherdata</h2>
-  <h5><small>Last updated about 1 minute ago </small></h5> 
-  <p>
-    <strong>Temperature: </strong>
-     <%= @measurement.temp.round(1) %>&deg;C</p>
-  </p>
-  <p>
-    <strong>Dewpoint: </strong>
-     <%= @measurement.dewpoint.round(1) %>&deg;C </p>
-  </p>
-  <p>
-    <strong>Airpressure: </strong>
-     <%= @measurement.airpressure.round(1) %> mbar</p>
-  </p>
-  <p>
-    <strong>Stationpressure: </strong>
-     <%= @measurement.stationpressure.round(1) %> mbar</p>
-  </p>
-  <p>
-    <strong>Visibility: </strong>
-     <%= @measurement.visibility.round(1) %> km</p>
-  </p>
-  <p>
-    <strong>Windspeed: </strong>
-     <%= @measurement.windspeed.round(1) %> km/h </p>
-  </p>
-  <p>
-    <strong>Precipitation: </strong>
-     <%= @measurement.precipitation.round(1) %> mm</p>
-  </p>
-  <p>
-    <strong>Snowlevel: </strong>
-     <%= @measurement.snow.round(1) %> cm</p>
-  </p>
-  <p>
-    <strong>Cloudcoverage: </strong>
-     <%= @measurement.cloudcoverage.round(1) %> %</p>
-  </p>
-  <p>
-    <strong>Winddirection: </strong>
-     <%= @measurement.winddir %>&deg;</p>
-  </p>
-  <h2> Nearby stations </h2>
-  <% if @station.nearbys(25).any? %>
-	  <% for s in @station.nearbys(25) %>
-	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (s.distance_from(@station.coordinates) ) %>km) </li>
-	  <% end %>
-	<% else %>
-		<p> No stations found in a radius of 25km. </p>
-	<% end %>
+  <% @datasets.each_with_index do |dataset, i|%>
+  <% i = i + 1 %>
+  <% if dataset.size > 0 %>
+      <h2>Weatherdata dataset <%= i %></h2>
+      <h5><small>Last updated <%= time_ago_in_words(dataset.last.date) %> ago</small></h5>
+      <table class="small_text zebra-striped">
+      <th></th>
+      <th>Temperature</th>
+      <th>Dewpoint</th>
+      <th>Airpressure</th>
+      <th>Stationpressure</th>
+      <th>Visibility</th>
+      <th>Windspeed</th>
+      <th>Precipitation</th>
+      <th>Snowlevel</th>
+      <th>Cloudcoverage</th>
+      <th>Winddirection</th>
+      <% for measurement in dataset%>
+          <tr>
+            <td><strong><%= measurement.date.strftime('%m/%d/%Y') %></strong></td>
+            <td><%= measurement.temp.round(1) %></td>
+            <td><%= measurement.dewp.round(1) %></td>
+            <td><%= measurement.stp.round(1) %></td>
+            <td><%= measurement.slp.round(1) %></td>
+            <td><%= measurement.visib.round(1) %></td>
+            <td><%= measurement.wdsp.round(1) %></td>
+            <td><%= measurement.prcp.round(1) %></td>
+            <td><%= measurement.sndp.round(1) %></td>
+            <td><%= measurement.cldc.round(1) %></td>
+            <td><%= measurement.wnddir.round %> </td>
+          </tr>
+      <% end %>
+      </table>
+  <% end %>
+  <% end %>
+
+
+<% if @datasetthree.size > 0 %>
+<!-- Dataset three here graph -->
+<% end %>

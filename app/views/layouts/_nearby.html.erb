@@ -1,0 +1,11 @@
+  </div>
+  <div class="span4">
+  <h2> Nearby stations </h2>
+  <% if @station.nearbys(25).any? %>
+	  <% for s in @station.nearbys(25) %>
+	  	<li><%= link_to "#{s.country.capitalize}, #{s.city.capitalize}", s %> (<%= (Geocoder::Calculations.distance_between(@station.coordinates, s.coordinates).round(2)) %>km) </li>
+	  <% end %>
+	<% else %>
+		<p> No stations found in a radius of 25km. </p>
+	<% end %>
+</div>
