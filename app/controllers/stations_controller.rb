@@ -45,7 +45,7 @@ class StationsController < ApplicationController
     @all_clouds = []
     @all_dates = []
     #build graph data
-    @station.datasetones.order(:desc).limit(15).each do |m|
+    @station.datasetones.order(:desc).limit(60).each do |m|
       @all_clouds << m.cloudcoverage
       @all_dates << m.date.to_i
     end
