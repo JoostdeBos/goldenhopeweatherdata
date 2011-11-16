@@ -1,4 +1,9 @@
-<% title "Dataset two" %>
+<% if params[:date] %>
+<% date = params[:date] %>
+<% else %>
+<% date = Time.now %>
+<% end %>
+<% title "Dataset two - " + date %>
 
 <%= render 'search' %>
 
