@@ -1,5 +1,5 @@
 
-  <h2>Weatherdata</h2>
+  <h2>Weatherdata Dataset one</h2>
   <h5><small>Last updated one second ago </small></h5>
   <table class="small_text zebra-striped">
   <th></th>
@@ -13,9 +13,10 @@
   <th>Snowlevel</th>
   <th>Cloudcoverage</th>
   <th>Winddirection</th>
+  <% days - 0 %>
   <% for measurement in @measurements%>
   <tr>
-    <td><strong><%= measurement.date.strftime('%m/%d/%Y') %></strong></td>
+    <td><strong><%= (measurement.date - days.day).strftime('%m/%d/%Y') %></strong></td>
     <td><%= measurement.temp.round(1) %></td>
     <td><%= measurement.dewp.round(1) %></td>
     <td><%= measurement.stp.round(1) %></td>
@@ -27,5 +28,6 @@
     <td><%= measurement.cldc.round(1) %></td>
     <td><%= measurement.wnddir.round %> </td>
   </tr>
+  <% days = days + 1 %>
   <% end %>
   </table>

@@ -1,4 +1,6 @@
 development:
+  # host: 145.33.89.41
+  # database: wdb
   host: localhost
   database: golden_hope_development
   use_utc: true

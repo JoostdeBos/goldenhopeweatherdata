@@ -1,4 +1,5 @@
 class StationsController < ApplicationController
+  respond_to :html, :xml, :json
 	before_filter :login_required
       
   def index
@@ -51,26 +52,25 @@ class StationsController < ApplicationController
     @all_clouds = []
     @all_dates = []
     #build graph data
+    minute = 1.minute
     @station.datasetthrees.each do |m|
-      @all_clouds << m["cldc"]
-      @all_dates << m["date"].to_i
+      @all_clouds << m["cldc"].round(1)
+      @all_dates << (Time.now + minute).to_i * 1000
+      minute = minute + 1.minute
     end
     @all_clouds.reverse
     @all_dates.reverse
-    @station_id = @station.id.to_s
+    @station_id = "updatechart?station_id=#{@station.id.to_s}"
     respond_to do |format|
       format.js { render :layout => false }
     end
   end
 
   def update_chart
-    station = Station.find(params[:station_id])
-    @cldc = station.datasetthrees.last["cldc"]
+    @station = Station.find(params[:station_id])
+    @response = [Time.now.to_i * 1000, @station.datasetthrees.last["cldc"].round(1)]
     respond_to do |format|
-      format.js { render :layout => false }
-      format.json {
-        render :json => @cldc.to_json
-      }
+      format.json { render :json => @response }
     end
   end
 

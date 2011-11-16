@@ -42,9 +42,9 @@ class Station
   #Station.dataset_one_on_date(Time.parse('2011-11-11'))
   # => fetches all stations that have a dataset on 11-11-11
   #
-  scope :dataset_one_on_date, lambda {|date| where("datasetones.date" => {'$gte' => date - 1.day, '$lt' => date }) }
+  scope :dataset_one_on_date, lambda {|date| where("datasetones.date" => {'$gte' => date - 2.days, '$lt' => date }) }
 
-  scope :dataset_two_on_date, lambda {|date| where("datasettwos.date" => {'$gte' => date - 1.day, '$lt' => date }) }
+  scope :dataset_two_on_date, lambda {|date| where("datasettwos.date" => {'$gte' => date - 2.days, '$lt' => date }) }
   
   geo_index :location
 
