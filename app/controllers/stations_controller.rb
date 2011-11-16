@@ -26,10 +26,17 @@ class StationsController < ApplicationController
 
 
   def all_to_xml
-  @stations = Station.all.limit(250)
-  send_data @stations.to_xml,
+  stations = Station.all
+  send_data stations.to_xml,
     :type => 'text/xml; charset=UTF-8;',
     :disposition => "attachment; filename=stations.xml"
+  end
+
+  def datasetthree_to_xml
+    dataset = Station.all.without(:datasetones, :datasettwos)
+    send_data dataset.to_xml,
+    :type => 'text/xml; charset=UTF-8;',
+    :disposition => "attachment; filename= iWeather Dataset Three.xml"
   end
 
   def map
@@ -50,9 +57,21 @@ class StationsController < ApplicationController
     end
     @all_clouds.reverse
     @all_dates.reverse
+    @station_id = @station.id.to_s
     respond_to do |format|
       format.js { render :layout => false }
     end
   end
-  
+
+  def update_chart
+    station = Station.find(params[:station_id])
+    @cldc = station.datasetthrees.last["cldc"]
+    respond_to do |format|
+      format.js { render :layout => false }
+      format.json {
+        render :json => @cldc.to_json
+      }
+    end
+  end
+
 end

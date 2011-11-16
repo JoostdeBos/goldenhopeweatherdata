@@ -29,9 +29,15 @@ GoldenHope::Application.routes.draw do
 
   match 'datasettwo_to_xml' => 'datasettwos#datasettwo_to_xml'
 
+  match 'datasetthree_to_xml' => 'stations#datasetthree_to_xml'
+
   match 'datasetthree' => 'stations#map'
 
   match 'realtimechart' => 'stations#realtimechart'
+
+  match 'updatechart' => 'stations#update_chart'
+
+  match 'autocomplete_stations_address' => 'stations#autocomplete_stations_address'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

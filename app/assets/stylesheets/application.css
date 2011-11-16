@@ -40,6 +40,9 @@ footer {
 
 .ui-datepicker-calendar {
 	background-color: whiteSmoke;
+  	-moz-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	box-shadow: 5px 5px 5px #888;
 }
 
 .ui-datepicker-calendar thead {

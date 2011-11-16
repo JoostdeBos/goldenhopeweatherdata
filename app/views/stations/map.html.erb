@@ -1,5 +1,7 @@
 <% title "Dataset 3" %>
 
+<%= link_to "Download as XML", :datasetthree_to_xml, :class => "btn", :style => "float: right; margin-top: -50px; /*lol haxx*/" %>
+
 <%= gmaps4rails(@json) %>
 
 <div id="chart-container"></div>
